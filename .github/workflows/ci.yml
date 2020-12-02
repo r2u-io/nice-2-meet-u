@@ -55,6 +55,7 @@ jobs:
           aws-region: us-east-1
       - name: Deploy
         run: |
+          yarn build
           yarn deploy
         env:
           STAGE: dev
