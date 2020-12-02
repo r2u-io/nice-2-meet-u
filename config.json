@@ -1,0 +1,12 @@
+{
+  "name": {
+    "value": "nice-2-meet-u",
+    "description": "Name of your serverless.yml service that will be deployed on AWS"
+  },
+  "schedule": {
+    "value": "rate(14 days)",
+    "value_1": "cron(0 12 ? * 4#1 *)",
+    "value_2": "cron(0 12 ? * 4#3 *)",
+    "description": "Schedule of the bot. defaults to 1st and 3rd Wednesday 14h00 UTC. See https://docs.aws.amazon.com/amazoncloudwatch/latest/events/scheduledevents.html and https://stackoverflow.com/questions/63059020/aws-cron-expression-to-run-every-other-monday"
+  }
+}

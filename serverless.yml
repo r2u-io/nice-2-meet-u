@@ -1,0 +1,33 @@
+service: ${self:custom.config.name.value}
+
+custom:
+  config: ${file(config.json)}
+  prune:
+    automatic: true
+    number: 1
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  timeout: 30
+  memorySize: 512
+  apiGateway:
+    shouldStartNameWithService: true
+  environment:
+    SLACK_API_TOKEN: ${env:SLACK_API_TOKEN}
+
+functions:
+  scheduleConversation:
+    handler: dist/handlers/scheduleConversation.run
+    events:
+      - http:
+          path: /scheduleConversation
+          method: post
+          cors: true
+      - schedule: ${self:custom.config.schedule.value_1}
+      - schedule: ${self:custom.config.schedule.value_2}
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-prune-plugin
